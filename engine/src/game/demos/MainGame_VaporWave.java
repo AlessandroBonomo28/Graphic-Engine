@@ -60,7 +60,7 @@ public class MainGame_VaporWave extends GameEngine
 		rasterizer.setRenderDistance(20);
 		
 		camera = getCamera();
-		
+		// 3d files path
 		String sunFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\sun.ply";
 		String terrainPath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\terrainVaporwave.ply";
 		
