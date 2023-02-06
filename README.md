@@ -34,7 +34,7 @@ I made this engine to understand how 3D graphics works. I started from a simple 
 
 ## Arwing model rotating around sphere
 - Click [here](https://www.youtube.com/watch?v=cg0XTDhKB4I&ab_channel=Idostuff) to view on YouTube.
-- 
+
 ![Screenshot (148)](https://user-images.githubusercontent.com/75626033/217106194-0bf5d6ec-9e6b-427e-b532-73049eb42250.png)
 
 ![Screenshot (147)](https://user-images.githubusercontent.com/75626033/217105965-856e4ac8-0d81-4a19-9e61-7df3689e54c6.png)
