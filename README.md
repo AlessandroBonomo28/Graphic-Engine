@@ -21,8 +21,11 @@ public void drawOutlineTriangle(Graphics2D g,Color c)
 	g.drawLine((int)vp3.x, (int)vp3.y,(int) vp1.x, (int)vp1.y);
 }
 ```
+In a 2D world, objects have no depth. The observer sees a portion of the world trough a rectangle and the objects can be represented using X,Y coordinates.
+
 ![1](https://user-images.githubusercontent.com/75626033/217095591-3cff1bb9-8f7d-4633-89fb-5aef558b6a2a.png)
 
+In 3D things start to get a bit harder: now objects have depth. This means that objects will get bigger as they approach the observer. The observer sees the world trough a **frustum** instead of a 2D rectangle. Objects now have 3 components: X,Y,Z. 
 
 ![2](https://user-images.githubusercontent.com/75626033/217095607-30f498fc-d50a-4dee-a352-cc26b5c6d795.png)
 
