@@ -10,8 +10,8 @@ In 3D things start to get a bit harder: now objects have depth. This means that 
 
 ![2](https://user-images.githubusercontent.com/75626033/217098875-6fadc43d-a698-4e55-b96d-3d2ddd7c7724.png)
 
-![3](https://user-images.githubusercontent.com/75626033/217095618-ebf3b609-cc7a-474b-aacc-29dac7d3b83d.png)
+![3](https://user-images.githubusercontent.com/75626033/217099229-cda30f3f-d57d-481b-ad55-cfbf2339bd50.png)
 
-- Visualization of a frustum
+- Visualization of a **Frustum**
 
 ![viewing frustum](https://user-images.githubusercontent.com/75626033/217095508-80a96407-1ea6-4027-b686-8a27700aa156.JPG)
