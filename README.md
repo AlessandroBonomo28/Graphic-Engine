@@ -27,5 +27,7 @@ public void drawOutlineTriangle(Graphics2D g,Color c)
 ![2](https://user-images.githubusercontent.com/75626033/217095607-30f498fc-d50a-4dee-a352-cc26b5c6d795.png)
 
 ![3](https://user-images.githubusercontent.com/75626033/217095618-ebf3b609-cc7a-474b-aacc-29dac7d3b83d.png)
+
 - Visualization of a frustum
+
 ![viewing frustum](https://user-images.githubusercontent.com/75626033/217095508-80a96407-1ea6-4027-b686-8a27700aa156.JPG)
