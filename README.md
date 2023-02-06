@@ -28,8 +28,8 @@ I made this engine to understand how 3D graphics works. I started from a simple 
 ![Screenshot (144)](https://user-images.githubusercontent.com/75626033/217105835-16ea79ff-b134-403d-9750-db8b5f3d9c78.png)
 
 ## Arwing model rotating around sphere
+- Click [here](https://www.youtube.com/watch?v=cg0XTDhKB4I&ab_channel=Idostuff) to view on YouTube.
 
-![Screenshot (146)](https://user-images.githubusercontent.com/75626033/217105949-299ef58b-cf9f-498f-b99e-17c7fda4e766.png)
 ![Screenshot (147)](https://user-images.githubusercontent.com/75626033/217105965-856e4ac8-0d81-4a19-9e61-7df3689e54c6.png)
 
 ![Screenshot (150)](https://user-images.githubusercontent.com/75626033/217106038-b568f193-5343-41a1-88d9-90f3c2121339.png)
