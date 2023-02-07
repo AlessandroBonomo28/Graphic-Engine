@@ -3,8 +3,8 @@ I made this engine to understand how 3D graphics works. I started from a simple 
 # Setup
 - Clone the repository
 - Open the project with eclipse
-- go to engine/src/game/demo
-- run one of the demos
+- Go to engine/src/game/demos
+- Run one of the demos
 # Demos
 ## I did the nostalgic Windows XP pipes
 - Click [here](https://www.youtube.com/watch?v=eeGIuovI0Bw&ab_channel=Idostuff) to view on YouTube PART 1.
