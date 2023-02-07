@@ -1,5 +1,6 @@
 # JAVA Graphic Engine (Not very optimized)
-I made this engine to understand how 3D graphics works. I started from a simple drawline function and progressively increased the complexity.
+I made this engine to understand how 3D graphics works. I started from a simple drawline function and progressively increased the complexity.<br>
+If you are interested in the teory behind it I suggest you to read this paper
 # Setup
 - Clone the repository
 - Open the project with eclipse
