@@ -1,6 +1,6 @@
 # JAVA Graphic Engine (Not very optimized)
 I made this engine to understand how 3D graphics work. I started from a simple drawline function and progressively increased the complexity.<br>
-If you are interested in the teory behind it I suggest you to read [this paper](https://judelco.github.io/opengl_tutorial/Positioning/Tut04%20Perspective%20Projection.html).
+If you are interested in the theory behind it I suggest you to read [this paper](https://judelco.github.io/opengl_tutorial/Positioning/Tut04%20Perspective%20Projection.html).
 # Setup
 - Clone the repository
 - Open the project with eclipse
