@@ -57,14 +57,14 @@ public class MainGame_Sample extends GameEngine
 		
 		camera = getCamera();
 		
-		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\cubo.obj";
+		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\arwing3.ply";
 		
 	    String backgroundMusicPath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\audio\\vaporwaveBg.wav";
 		// Riproduci background music
 	    //Audio.getInstance().playMusicLoop(backgroundMusicPath,0.6f);
 	    try {
 	    	
-			shape = new Transform(objReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
+			shape = new Transform(plyReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
 			shape.transla(Vector3.forward().multiply(5), Space.World);
 			
 			camera.setRotation(new Vector3(0.7853981633974486,0,0));
@@ -142,6 +142,7 @@ public class MainGame_Sample extends GameEngine
 		if((aspectIndex == 4 || aspectIndex == 5 ||
 				aspectIndex == 16)&& colorsOverTime.size()>1) // se è impostato l'aspetto che mostra il colore della mesh
 		{
+			/*
 			Color c = colorsOverTime.get(colorIndex);
 			Vector3 c1 = new Vector3(c.getRed(),c.getGreen(),c.getBlue());
 			
@@ -159,7 +160,7 @@ public class MainGame_Sample extends GameEngine
 				tInterpColor=0;
 				colorIndex++;
 				if(colorIndex>=colorsOverTime.size())colorIndex=0;
-			}
+			}*/
 		}
 		
 
