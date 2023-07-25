@@ -25,7 +25,7 @@ public class Rasterizer
 	// deve essere un vettore unitario
 	private Vector3 lightDirection = new Vector3(-1,0,0);
 	
-	private Vector3 nearPlanePoint = new Vector3(0,0,2f);
+	private Vector3 nearPlanePoint = new Vector3(0,0,0.01f);
 	private Vector3 nearPlaneNormal = new Vector3(0,0,1);
 	
 	private double lightIntensityCorrection = 0.15; // tra 0 e 1
@@ -299,5 +299,8 @@ public class Rasterizer
 	public void setMinPixelBrightness(double minPixelBrightness) {
 		this.minPixelBrightness = clamp(minPixelBrightness,0,1);
 	}
-	
+	public void setNearPlane(Vector3 point,Vector3 normal) {
+		this.nearPlanePoint = point;
+		this.nearPlaneNormal = normal.normalized();
+	}
 }

@@ -55,7 +55,7 @@ public class MainGame_Sample extends GameEngine
 		rasterizer.setLightDirection(new Vector3(0.5f,0.5f,1));
 		rasterizer.setUseRenderDistance(false);
 		rasterizer.setRenderDistance(20);
-		
+		rasterizer.setNearPlane(new Vector3(0,0,2), new Vector3(0,0,1));
 		camera = getCamera();
 		
 		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\arwing3.ply";
@@ -66,10 +66,10 @@ public class MainGame_Sample extends GameEngine
 	    try {
 	    	
 			shape = new Transform(plyReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
-			shape.transla(Vector3.forward().multiply(5), Space.World);
+			shape.transla(Vector3.forward().multiply(2), Space.World);
 			
 			camera.setRotation(new Vector3(0.7853981633974486,0,0));
-			camera.transla(new Vector3(0,1.5725271418507085,0),Space.World);
+			camera.transla(new Vector3(0,0,0),Space.World);
 			camera.transla(Vector3.backward().multiply(2.5), Space.Local);
 			camera.transla(Vector3.down().multiply(0.5f), Space.World);
 			
@@ -121,7 +121,7 @@ public class MainGame_Sample extends GameEngine
 		super.update();
 		
 		try {
-			shape.setRotation(new Vector3(0 ,angolo,0));
+			shape.setRotation(new Vector3(angolo ,angolo, angolo));
 		} catch (MatrixException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -249,41 +249,35 @@ public class MainGame_Sample extends GameEngine
 		g.drawString("Simple engine demo",0,20); 
 		g.drawString("Position: "+camera.getPosition(),0,40); 
 		g.drawString("Look euler angles (X,Y,Z): "+camera.getRotation().multiply(180/Math.PI)+" °",0,60); 
-		try {
-			g.drawString("Forward: "+camera.forward()+" °",0,80);
-		} catch (MatrixException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		g.drawString("Move (WASDRF), Look (1234): ",0,100); 
+		g.drawString("Move (WASDRF), Look (1234): ",0,80); 
 	}
 	@Override
 	protected void keyTyped(KeyEvent e) {
 		try {
-			float speed = 100;
+			float speed = .1f;
 			if(e.getKeyChar() == 'w')
 			{
-				camera.transla(Vector3.forward().multiply(deltaTime*speed), Space.Local);
+				camera.transla(Vector3.forward().multiply(speed), Space.Local);
 			}
 			else if(e.getKeyChar() == 's')
 			{
-				camera.transla(Vector3.backward().multiply(deltaTime*speed), Space.Local);
+				camera.transla(Vector3.backward().multiply(speed), Space.Local);
 			}
 			if(e.getKeyChar() == 'a')
 			{
-				camera.transla(Vector3.right().multiply(deltaTime*speed), Space.Local);
+				camera.transla(Vector3.right().multiply(speed), Space.Local);
 			}
 			else if(e.getKeyChar() == 'd')
 			{
-				camera.transla(Vector3.left().multiply(deltaTime*speed), Space.Local);
+				camera.transla(Vector3.left().multiply(speed), Space.Local);
 			}
 			if(e.getKeyChar() == 'r')
 			{
-				camera.transla(Vector3.up().multiply(deltaTime*speed), Space.Local);
+				camera.transla(Vector3.up().multiply(speed), Space.Local);
 			}
 			else if(e.getKeyChar() == 'f')
 			{
-				camera.transla(Vector3.down().multiply(deltaTime*speed), Space.Local);
+				camera.transla(Vector3.down().multiply(speed), Space.Local);
 			}
 			else if(e.getKeyChar() == '1')
 			{

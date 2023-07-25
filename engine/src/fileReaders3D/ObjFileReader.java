@@ -50,29 +50,34 @@ public class ObjFileReader implements FileReader3D{
 		  }
 		  else if(data.charAt(0)=='f')
 		  {
-			  while(data.contains("//"))
-				  data =data.replace("//", "/0/");
-			  try
-			  {
-				  int endTriangle1= data.indexOf(' ',2);
-				  int endTriangle2= data.indexOf(' ',endTriangle1+1);
-				  
-				  
-			      Vector3 indexesV1 = readVertexIndexes(data.substring(2,endTriangle1));
-				  Vector3 indexesV2 = readVertexIndexes(data.substring(endTriangle1+1,endTriangle2));
-				  Vector3 indexesV3 = readVertexIndexes(data.substring(endTriangle2+1));
-			    	
-				  Vertex v1 = buildVertex(indexesV1, normals, vertici);
-				  Vertex v2 = buildVertex(indexesV2, normals, vertici);
-				  Vertex v3 = buildVertex(indexesV3, normals, vertici);
-			    	
-				  //triangoli.add(new Triangle(v1,v2,v3));
+			  if(!data.contains("/")) {
+				  Vector3 indexes = readVertexLineAsVector3(data);
+				  Vertex v1 = vertici.get((int) indexes.x -1);
+				  Vertex v2 = vertici.get((int) indexes.y -1);
+				  Vertex v3 = vertici.get((int) indexes.z -1);
 				  triangoli.add(new Triangle(v1,v2,v3));
-			  } catch(NumberFormatException e)
-			  {
-				  throw new MeshInsideFileIsNotTriangulated();
-			  }
-			  
+			  } else {
+				  while(data.contains("//"))
+					  data =data.replace("//", "/0/");
+				  try
+				  {
+					  int endTriangle1= data.indexOf(' ',2);
+					  int endTriangle2= data.indexOf(' ',endTriangle1+1);
+					  
+				      Vector3 indexesV1 = readVertexIndexes(data.substring(2,endTriangle1));
+					  Vector3 indexesV2 = readVertexIndexes(data.substring(endTriangle1+1,endTriangle2));
+					  Vector3 indexesV3 = readVertexIndexes(data.substring(endTriangle2+1));
+				    	
+					  Vertex v1 = buildVertex(indexesV1, normals, vertici);
+					  Vertex v2 = buildVertex(indexesV2, normals, vertici);
+					  Vertex v3 = buildVertex(indexesV3, normals, vertici);
+				    	
+					  triangoli.add(new Triangle(v1,v2,v3));
+				  } catch(NumberFormatException e)
+				  {
+					  throw new MeshInsideFileIsNotTriangulated();
+				  }
+			  }	  
 		  }
 		}
 //		System.out.println("tot vertici:"+vertici.size());
