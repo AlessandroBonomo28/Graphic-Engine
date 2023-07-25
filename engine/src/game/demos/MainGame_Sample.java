@@ -58,17 +58,17 @@ public class MainGame_Sample extends GameEngine
 		
 		camera = getCamera();
 		
-		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\heart.obj";
+		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\arwing3.ply";
 		
 	    String backgroundMusicPath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\audio\\vaporwaveBg.wav";
 		// Riproduci background music
 	    //Audio.getInstance().playMusicLoop(backgroundMusicPath,0.6f);
 	    try {
 	    	
-			shape = new Transform(objReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
+			shape = new Transform(plyReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
 			shape.transla(Vector3.forward().multiply(5), Space.World);
 			
-			//camera.setRotation(new Vector3(0.7853981633974486,0,0));
+			camera.setRotation(new Vector3(0.7853981633974486,0,0));
 			camera.transla(new Vector3(0,1.5725271418507085,0),Space.World);
 			camera.transla(Vector3.backward().multiply(2.5), Space.Local);
 			camera.transla(Vector3.down().multiply(0.5f), Space.World);
