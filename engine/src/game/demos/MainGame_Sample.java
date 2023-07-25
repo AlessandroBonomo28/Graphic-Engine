@@ -16,6 +16,7 @@ import Graphics.Rasterizer;
 import fileReaders3D.ObjFileReader;
 import fileReaders3D.PlyFileReader;
 import fileReaders3D.FileReaderExceptions.FileReaderException;
+import game.Audio;
 import game.GameEngine;
 import game.Hill;
 import geometry.*;
@@ -57,7 +58,7 @@ public class MainGame_Sample extends GameEngine
 		
 		camera = getCamera();
 		
-		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\cubo.obj";
+		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\heart.obj";
 		
 	    String backgroundMusicPath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\audio\\vaporwaveBg.wav";
 		// Riproduci background music
@@ -109,22 +110,9 @@ public class MainGame_Sample extends GameEngine
 		
 	}
 	
-	double zOff = 0;
+	
 	double angolo=0;
-	double speedTerrain = 0.01f;
 	
-	double scaleNoise = 2;
-	double maxH = 3f;
-	Vector3 lightDir = new Vector3(0.3,0.7,0.2);
-	
-	ArrayList<Color> colorsOverTime = (ArrayList<Color>) 
-			Stream.of(new Color(255,0,0),new Color(255,127,0),
-					new Color(255,255,0),new Color(0,255,0),
-					new Color(0,0,255),new Color(75,0,130),
-					new Color(148,0,211)).collect(Collectors.toList());
-	int colorIndex = 0;
-	double tInterpColor=0;
-	double timeSwitchColor = 1;
 	
 	// Update viene chiamato prima di draw
 	@Override
@@ -139,29 +127,7 @@ public class MainGame_Sample extends GameEngine
 			e.printStackTrace();
 		}
 		angolo += Math.PI / 200;
-		if((aspectIndex == 4 || aspectIndex == 5 ||
-				aspectIndex == 16)&& colorsOverTime.size()>1) // se è impostato l'aspetto che mostra il colore della mesh
-		{
-			/*
-			Color c = colorsOverTime.get(colorIndex);
-			Vector3 c1 = new Vector3(c.getRed(),c.getGreen(),c.getBlue());
-			
-			if(colorIndex == colorsOverTime.size()-1) c = colorsOverTime.get(0);
-			else c = colorsOverTime.get(colorIndex+1);
-			
-			Vector3 c2 = new Vector3(c.getRed(),c.getGreen(),c.getBlue());
-			
-			Vector3 interp = Interpolation.interpolaVector3(tInterpColor, c1,c2);
-			shape.getMesh().setColor(new Color((int)interp.x,(int)interp.y,(int)interp.z));
-			tInterpColor += deltaTime * (1/timeSwitchColor);
-			
-			if(tInterpColor>=1)
-			{
-				tInterpColor=0;
-				colorIndex++;
-				if(colorIndex>=colorsOverTime.size())colorIndex=0;
-			}*/
-		}
+		
 		
 
 	}
@@ -338,33 +304,6 @@ public class MainGame_Sample extends GameEngine
 			{
 				System.out.println("Camera info: "+camera);
 				System.out.println("terrain info: "+shape);
-			}
-			else if(e.getKeyChar() == '7')
-			{
-				maxH -=0.05f;
-			}
-			else if(e.getKeyChar() == '8')
-			{
-				maxH +=0.05f;
-			}
-			else if(e.getKeyChar() == 'm')
-			{
-				scaleNoise -=0.01f;
-				if(scaleNoise<0)scaleNoise=0;
-			}
-			else if(e.getKeyChar() == 'k')
-			{
-				scaleNoise +=0.01f;
-			}
-			else if(e.getKeyChar() == 'p')
-			{
-				speedTerrain /=1.5f;
-			}
-			else if(e.getKeyChar() == 'o')
-			{
-				speedTerrain *=1.5f;
-				if(speedTerrain>=0.05f)speedTerrain=0.05f;
-				
 			}
 			else if(e.getKeyChar() =='h')
 			{
