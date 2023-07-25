@@ -69,17 +69,7 @@ public class GraphicEngine extends Drawer{
 				for(DrawableTriangle tri:rasterizer.rasterize(transform))
 					trianglesToDraw.add(tri);	
 			}
-			// ordina per Z depth buffer
-			Collections.sort(trianglesToDraw, new Comparator<Triangle>() {
-				@Override
-				public int compare(Triangle a, Triangle b) {
-					double aZ = a.centroid().z;
-					double bZ = b.centroid().z;
-					if(aZ == bZ)return 0;
-					if(aZ>bZ)return -1;
-					else return 1;
-				}
-			});
+			
 			for(DrawableTriangle tri:trianglesToDraw)
 			{
 				drawTriangle(g,tri);

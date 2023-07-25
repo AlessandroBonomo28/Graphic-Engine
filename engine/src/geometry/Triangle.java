@@ -41,7 +41,9 @@ public class Triangle {
 	}
 	private Vector3 calcNormal()
 	{
-		return Vector3.avg(this.v1.getNormal(),this.v2.getNormal(),this.v3.getNormal());
+		Vector3 a = Vector3.sub(v1.getPosition(),v2.getPosition());
+		Vector3 b = Vector3.sub(v1.getPosition(),v3.getPosition());
+		return Vector3.cross(a, b).normalized();
 	}
 	public void setColor(Color c)
 	{

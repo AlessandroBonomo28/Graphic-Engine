@@ -66,6 +66,14 @@ public class Vertex {
 		posShiftedByNormal = Transformation.ruotaSuAsseXYZ(nonRotatedPosShiftedByNormal, 
 				origine, angoli);
 	}
+	
+	public boolean isAboveOrOntoPlane(Vector3 planePoint, Vector3 planeNormal) {
+		planeNormal = planeNormal.normalized();
+		double d1 = position.dot(planeNormal);
+		double d2 = planePoint.dot(planeNormal);
+		return (d1-d2) >= 0;
+	}
+	
 	public Vertex copy()
 	{
 		return new Vertex(position,posShiftedByNormal,color);

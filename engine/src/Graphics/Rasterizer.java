@@ -2,6 +2,7 @@ package Graphics;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import geometry.*;
@@ -124,14 +125,15 @@ public class Rasterizer
 		double y = res.get(0, 1);
 		double z = res.get(0, 2);
 		double w = res.get(0, 3);
-		if(w!= 0 && w!= 1)return new Vector3(x/w, y/w, z/w);
+		if(w!= 0)return new Vector3(x/w, y/w, z/w);
 		else return new Vector3(x, y, z);
 		
 	}
 	private Vector3 toWindowSpace(Vector3 ndcCoord)
 	{
 		double z = ndcCoord.z;
-		ndcCoord = ndcCoord.sum(Vector3.one());
+		// porta al centro dello schermo le coordinate
+		ndcCoord = ndcCoord.sum(Vector3.one()); 
 		ndcCoord =  ndcCoord.multiply(0.5f*widthWindow);
 		ndcCoord.z = z; // mantieni Z depth
 		return ndcCoord;
@@ -139,6 +141,64 @@ public class Rasterizer
 	private double clamp(double val, double min, double max) {
 	    return Math.max(min, Math.min(max, val));
 	}
+	List<Triangle> clipAgainstPlane(Triangle triToClip, Vector3 planePoint, Vector3 planeNormalTowardsInside) {
+		ArrayList<Triangle> clippedTriangles = new ArrayList<Triangle>();
+		ArrayList<Vertex> outsideVertexes = new ArrayList<Vertex>();
+		ArrayList<Vertex> insideVertexes = new ArrayList<Vertex>();
+		
+		for(int i=0;i<3;i++) {
+			Vertex v;
+			if(i==0)v = triToClip.getV1();
+			else if(i==1)v = triToClip.getV2();
+			else v = triToClip.getV3();
+			
+			boolean isInside = v.isAboveOrOntoPlane(planePoint, planeNormalTowardsInside);
+			if(isInside) {
+				insideVertexes.add(v);
+			} else {
+				outsideVertexes.add(v);
+			}
+			
+		}
+		
+		int insideCount = insideVertexes.size();
+		
+		if(insideCount == 3) clippedTriangles.add(triToClip);
+		else if(insideCount == 1) { // form new triangle
+			Vector3 vo1 = outsideVertexes.get(0).getPosition(),vo2 = outsideVertexes.get(1).getPosition();
+			Vector3 vi = insideVertexes.get(0).getPosition(); 
+			Vector3 dir1 = Vector3.sub(vo1,vi);
+			Vector3 dir2 = Vector3.sub(vo2, vi);
+			try {
+				Vector3 intercept1 = Operations.interceptPlane(vo1, dir1, planePoint, planeNormalTowardsInside);
+				Vector3 intercept2 = Operations.interceptPlane(vo2, dir2, planePoint, planeNormalTowardsInside);
+				clippedTriangles.add(new Triangle(vi,intercept1,intercept2));
+			} catch(Exception e) {
+				clippedTriangles.add(triToClip);
+				return clippedTriangles;
+			}
+		} else if(insideCount == 2){ // form quad (2 new triangles)
+			Vector3 vi1 = insideVertexes.get(0).getPosition(),vi2 = insideVertexes.get(1).getPosition();
+			Vector3 vo = outsideVertexes.get(0).getPosition(); 
+			Vector3 dir1 = Vector3.sub(vo,vi1);
+			Vector3 dir2 = Vector3.sub(vo, vi2);
+			try {
+				Vector3 intercept1 = Operations.interceptPlane(vo, dir1, planePoint, planeNormalTowardsInside);
+				Vector3 intercept2 = Operations.interceptPlane(vo, dir2, planePoint, planeNormalTowardsInside);
+				
+				clippedTriangles.add(new Triangle(vi1,vi2,intercept2));
+				clippedTriangles.add(new Triangle(vi1,intercept1,intercept2));
+			} catch(Exception e) {
+				clippedTriangles.add(triToClip);
+				return clippedTriangles;
+			}
+		}
+		
+		return clippedTriangles;
+	}
+	private Vector3 nearPlanePoint = new Vector3(0,0,2f);
+	private Vector3 nearPlaneNormal = new Vector3(0,0,1);
+	private DrawableTriangleZDepthComparator comparatorZDepth = new DrawableTriangleZDepthComparator();
 	public List<DrawableTriangle> rasterize(Transform t) throws MatrixException
 	{
 		Mesh mesh = t.getMesh();
@@ -155,6 +215,9 @@ public class Rasterizer
 			Color colV2 = tri.getV2().getColor();
 			Color colV3 = tri.getV3().getColor();
 			
+			if(tri.getNormal().dot(camera.forward())>0)
+				continue;
+			
 			if(useRenderDistance)
 				if(Vector3.distanceMagnitude(camera.getPosition(),Vector3.avg(v1, v2, v3))
 						> renderDistanceSquared)
@@ -170,29 +233,36 @@ public class Rasterizer
 			v1 = toViewSpace(v1);
 			v2 = toViewSpace(v2);
 			v3 = toViewSpace(v3);
-
-			v1 = toNormalizedDeviceCoord(v1);
-			v2 = toNormalizedDeviceCoord(v2);
-			v3 = toNormalizedDeviceCoord(v3);
 			
-			// clip triangles outside view (easy way)
-			if(v1.z>=1 || v2.z>=1 || v3.z>=1)
-				continue;
-			
-			v1 = toWindowSpace(v1);
-			v2 = toWindowSpace(v2);
-			v3 = toWindowSpace(v3);
-			
-			Triangle rasterizedTriangle = new Triangle(
-					new Vertex(v1,colV1),
-					new Vertex(v2,colV2), 
-					new Vertex(v3,colV3)
-			);
-			
-			rasterizedTriangles.add(new DrawableTriangle(
-					rasterizedTriangle,lightIntensity,useDirectionalLight)
-			);
+			Triangle triToClip = new Triangle(v1,v2,v3);
+			List<Triangle> clippedTriangles = clipAgainstPlane(triToClip, nearPlanePoint, nearPlaneNormal);
+					
+			for(Triangle clippedTriangle : clippedTriangles) {
+				v1 = clippedTriangle.getV1().getPosition();
+				v2 = clippedTriangle.getV2().getPosition();
+				v3 = clippedTriangle.getV3().getPosition();
+				
+				v1 = toNormalizedDeviceCoord(v1);
+				v2 = toNormalizedDeviceCoord(v2);
+				v3 = toNormalizedDeviceCoord(v3);
+				
+				v1 = toWindowSpace(v1);
+				v2 = toWindowSpace(v2);
+				v3 = toWindowSpace(v3);
+				
+				Triangle rasterizedTriangle = new Triangle(
+						new Vertex(v1,colV1),
+						new Vertex(v2,colV2), 
+						new Vertex(v3,colV3)
+				);
+				
+				rasterizedTriangles.add(new DrawableTriangle(
+						rasterizedTriangle,lightIntensity,useDirectionalLight)
+				);
+			}
 		}
+		
+		Collections.sort(rasterizedTriangles, comparatorZDepth);
 		return rasterizedTriangles;
 	}
 	public void setRenderDistance(double renderDistance) {

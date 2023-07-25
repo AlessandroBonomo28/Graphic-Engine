@@ -203,7 +203,7 @@ public class Drawer extends Canvas implements Runnable
             }
 
             try {
-                Thread.sleep(5); // always a good idea to let is breath a bit
+                Thread.sleep(1); // always a good idea to let is breath a bit
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -74,7 +74,7 @@ public class MainGame_Sample extends GameEngine
 			
 			addToDrawList(shape);
 			
-			getRasterizer().setLightDirection(new Vector3(0,0.5,-1).normalized());
+			getRasterizer().setLightDirection(new Vector3(0,1,0).normalized());
 				
 			
 			
@@ -133,7 +133,7 @@ public class MainGame_Sample extends GameEngine
 		super.update();
 		
 		try {
-			shape.setRotation(new Vector3(angolo ,angolo,0));
+			shape.setRotation(new Vector3(0 ,angolo,0));
 		} catch (MatrixException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

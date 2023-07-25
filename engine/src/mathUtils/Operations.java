@@ -62,5 +62,17 @@ public class Operations {
 		Matrix b = makeMajorColumnVector(v);
 		return extractMajorColumnVector(Matrix.multiply(a, b));
 	}
-	
+	public static Vector3 interceptPlane(Vector3 vOrigin, Vector3 vDirection, Vector3 planePoint, Vector3 planeNormal) throws Exception
+	{
+	    planeNormal = planeNormal.normalized();
+	    vDirection = vDirection.normalized();
+	    double dot1 = planePoint.sub(vOrigin).dot(planeNormal);
+	    double dot2 = vDirection.dot(planeNormal);
+	    if(dot1==0 && dot2 ==0) return vOrigin;
+	    else if(dot1!=0 && dot2 ==0) 
+	    	throw new Exception("O: "+vOrigin+" D: "+vDirection +
+	    						" non intercetta il piano N: "+planeNormal+", P:"+planePoint);
+	    double t = dot1/dot2;
+	    return vOrigin.sum(vDirection.multiply(t));
+	}
 }

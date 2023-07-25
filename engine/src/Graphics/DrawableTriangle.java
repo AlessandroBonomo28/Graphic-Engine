@@ -47,7 +47,7 @@ public class DrawableTriangle extends Triangle {
 		super(v1, v2, v3, normal);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public double getLightIntensity() {
 		return brightness;
 	}
