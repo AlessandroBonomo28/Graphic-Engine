@@ -25,6 +25,9 @@ public class Rasterizer
 	// deve essere un vettore unitario
 	private Vector3 lightDirection = new Vector3(-1,0,0);
 	
+	private Vector3 nearPlanePoint = new Vector3(0,0,2f);
+	private Vector3 nearPlaneNormal = new Vector3(0,0,1);
+	
 	private double lightIntensityCorrection = 0.15; // tra 0 e 1
 	private double maxPixelBrightness = 1; // tra 0 e 1
 	private double minPixelBrightness = 0.1; // tra 0 e 1
@@ -196,9 +199,7 @@ public class Rasterizer
 		
 		return clippedTriangles;
 	}
-	private Vector3 nearPlanePoint = new Vector3(0,0,2f);
-	private Vector3 nearPlaneNormal = new Vector3(0,0,1);
-	private DrawableTriangleZDepthComparator comparatorZDepth = new DrawableTriangleZDepthComparator();
+	
 	public List<DrawableTriangle> rasterize(Transform t) throws MatrixException
 	{
 		Mesh mesh = t.getMesh();
@@ -215,7 +216,8 @@ public class Rasterizer
 			Color colV2 = tri.getV2().getColor();
 			Color colV3 = tri.getV3().getColor();
 			
-			if(tri.getNormal().dot(camera.forward())>0)
+			Vector3 lookAtTri = Vector3.sub(camera.getPosition(),tri.centroid());
+			if(-lookAtTri.dot(tri.getNormal())>0)
 				continue;
 			
 			if(useRenderDistance)
@@ -262,7 +264,6 @@ public class Rasterizer
 			}
 		}
 		
-		Collections.sort(rasterizedTriangles, comparatorZDepth);
 		return rasterizedTriangles;
 	}
 	public void setRenderDistance(double renderDistance) {

@@ -68,7 +68,7 @@ public class MainGame_Sample extends GameEngine
 			shape = new Transform(objReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
 			shape.transla(Vector3.forward().multiply(5), Space.World);
 			
-			camera.setRotation(new Vector3(0.7853981633974486,0,0));
+			//camera.setRotation(new Vector3(0.7853981633974486,0,0));
 			camera.transla(new Vector3(0,1.5725271418507085,0),Space.World);
 			camera.transla(Vector3.backward().multiply(2.5), Space.Local);
 			camera.transla(Vector3.down().multiply(0.5f), Space.World);
@@ -249,12 +249,18 @@ public class MainGame_Sample extends GameEngine
 		g.drawString("Simple engine demo",0,20); 
 		g.drawString("Position: "+camera.getPosition(),0,40); 
 		g.drawString("Look euler angles (X,Y,Z): "+camera.getRotation().multiply(180/Math.PI)+" °",0,60); 
-		g.drawString("Move (WASDRF), Look (1234): ",0,80); 
+		try {
+			g.drawString("Forward: "+camera.forward()+" °",0,80);
+		} catch (MatrixException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		g.drawString("Move (WASDRF), Look (1234): ",0,100); 
 	}
 	@Override
 	protected void keyTyped(KeyEvent e) {
 		try {
-			float speed = 10;
+			float speed = 100;
 			if(e.getKeyChar() == 'w')
 			{
 				camera.transla(Vector3.forward().multiply(deltaTime*speed), Space.Local);
