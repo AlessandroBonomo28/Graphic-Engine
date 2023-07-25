@@ -6,6 +6,9 @@ If you are interested in the theory behind it I suggest you to read [this paper]
 - Open the project with eclipse
 - Go to engine/src/game/demos
 - Run one of the demos
+
+![teapot1](https://github.com/AlessandroBonomo28/Graphic-Engine/assets/75626033/754a1731-6351-494b-bfd3-49627a49a07a)
+
 # Demos
 ## I did the nostalgic Windows XP pipes
 - Click [here](https://www.youtube.com/watch?v=eeGIuovI0Bw&ab_channel=Idostuff) to view on YouTube PART 1.
@@ -44,6 +47,7 @@ If you are interested in the theory behind it I suggest you to read [this paper]
 
 ![Screenshot (149)](https://user-images.githubusercontent.com/75626033/217106209-24685a3d-32a4-41e4-a178-bd631f941ee4.png)
 
+## Utah Teapot
 
-
+![teapot2](https://github.com/AlessandroBonomo28/Graphic-Engine/assets/75626033/9d73031b-37c6-464a-8eca-6e0847f31920)
 
