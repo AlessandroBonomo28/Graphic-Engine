@@ -67,7 +67,7 @@ public class ObjFileReader implements FileReader3D{
 				  Vertex v3 = buildVertex(indexesV3, normals, vertici);
 			    	
 				  //triangoli.add(new Triangle(v1,v2,v3));
-				  triangoli.add(new Triangle(v1,v3,v2));
+				  triangoli.add(new Triangle(v1,v2,v3));
 			  } catch(NumberFormatException e)
 			  {
 				  throw new MeshInsideFileIsNotTriangulated();

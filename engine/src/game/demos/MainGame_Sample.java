@@ -57,14 +57,14 @@ public class MainGame_Sample extends GameEngine
 		
 		camera = getCamera();
 		
-		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\arwing3.ply";
+		String shapeFilePath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\3dFiles\\cubo.obj";
 		
 	    String backgroundMusicPath = "C:\\Users\\Alessandro\\OneDrive\\Desktop\\progetti\\gameEngine\\audio\\vaporwaveBg.wav";
 		// Riproduci background music
 	    //Audio.getInstance().playMusicLoop(backgroundMusicPath,0.6f);
 	    try {
 	    	
-			shape = new Transform(plyReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
+			shape = new Transform(objReader.readMeshFromFile(shapeFilePath),new Vector3(0,0,0)); 
 			shape.transla(Vector3.forward().multiply(5), Space.World);
 			
 			camera.setRotation(new Vector3(0.7853981633974486,0,0));
