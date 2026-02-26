@@ -1,8 +1,18 @@
-# Java Graphic Engine (Not very optimized)
-I made this engine to understand how 3D graphics work. I started from a simple drawline function and progressively increased the complexity.<br>
+# Graphic Engine 3D
+I made a tutorial series on my blog on how to make a 3D engine from scratch using the p5.js library online. This repo contains all the links to the p5.js examples and a bonus implementation in Java.
 
+Ho creato una serie di tutorial sul mio blog su come realizzare un motore 3D da zero utilizzando la libreria p5.js online. Questa repository contiene tutti i riferimenti agli esempi in p5.js nel blog e un'implementazione bonus in Java.
 
-# Setup
+### Tutorial p5.js series on my blog
+- part 1: https://alessandrobonomo28.github.io/posts/Scrivere-un-3D-engine-da-zero-tutorial-1/
+- part 2: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-2/
+- part 3: https://alessandrobonomo28.github.io/posts/Scrivere-un-3D-engine-da-zero-tutorial-3/
+- part 4: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-4/
+- part 5: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-5/
+- part 6: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-6/
+- part 7: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-7/
+- part 8: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-8/
+# Java project Setup
 - Clone the repository
 - Open the project with eclipse
 - Go to engine/src/game/demos
