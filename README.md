@@ -12,7 +12,9 @@ Ho creato una serie di tutorial sul mio blog su come realizzare un motore 3D da 
 - part 6: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-6/
 - part 7: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-7/
 - part 8: https://alessandrobonomo28.github.io/posts/Scrivere-un-3d-engine-da-zero-tutorial-8/
-# Java project Setup
+### codice sorgente del progetto hardware con arduino + touchscreen elegoo
+https://github.com/AlessandroBonomo28/Elegoo-TouchScreen-2.8-GFX-fun
+# Bonus Java project Setup
 - Clone the repository
 - Open the project with eclipse
 - Go to engine/src/game/demos
